@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a1a33;
+  --color-ink-2: #0f2547;
+  --color-ink-3: #1c3363;
+  --color-cream: #f6efe2;
+  --color-cream-2: #fbf6ea;
+  --color-paper: #fefaf1;
+  --color-gold: #c9a24a;
+  --color-gold-2: #d9b871;
+  --color-gold-soft: #ecd9a8;
+  --color-rose: #b5876a;
+  --color-muted: #6a7690;
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.font-display { font-family: var(--font-display); font-optical-sizing: auto; }
+
+/* Subtle grain overlay */
+.grain::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Star field for dark sections */
+.stars {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,0.55), transparent 60%),
+    radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.35), transparent 60%),
+    radial-gradient(1.2px 1.2px at 40% 70%, rgba(255,255,255,0.45), transparent 60%),
+    radial-gradient(1px 1px at 85% 60%, rgba(255,255,255,0.30), transparent 60%),
+    radial-gradient(1.4px 1.4px at 10% 85%, rgba(255,255,255,0.40), transparent 60%),
+    radial-gradient(1px 1px at 55% 50%, rgba(255,255,255,0.28), transparent 60%);
+}
+
+/* Gold underline flourish */
+.flourish::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 56px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: 14px auto 0;
+}
+.flourish-left::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 56px;
+  background: linear-gradient(90deg, var(--color-gold), transparent);
+  margin: 14px 0 0;
+}
+
+/* Reveal on scroll */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 900ms cubic-bezier(.2,.7,.2,1) both; }
+
+/* Floating orb animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-14px) scale(1.02); }
+}
+.float { animation: float 8s ease-in-out infinite; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.9; }
+}
+.twinkle { animation: twinkle 4s ease-in-out infinite; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #f2ead9; }
+::-webkit-scrollbar-thumb { background: #c9a24a80; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #c9a24a; }
+
+/* Section chip */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--color-gold);
+}
+.eyebrow::before, .eyebrow::after {
+  content: ""; width: 22px; height: 1px; background: currentColor; opacity: .6;
+}
+
+/* Buttons */
+.btn-gold {
+  background: linear-gradient(180deg, #d9b871, #b7893c);
+  color: #0a1a33;
+  border: 1px solid #b7893c;
+  box-shadow: 0 8px 24px -12px rgba(201,162,74,0.55), inset 0 1px 0 rgba(255,255,255,0.35);
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+}
+.btn-gold:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 14px 28px -14px rgba(201,162,74,0.65), inset 0 1px 0 rgba(255,255,255,0.5); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid rgba(10,26,51,0.25);
+  transition: all .25s ease;
+}
+.btn-ghost:hover { background: var(--color-ink); color: var(--color-cream); border-color: var(--color-ink); }
+
+.btn-ghost-light {
+  background: transparent;
+  color: var(--color-cream);
+  border: 1px solid rgba(255,255,255,0.35);
+  transition: all .25s ease;
+}
+.btn-ghost-light:hover { background: var(--color-cream); color: var(--color-ink); }
+
+/* Card hover */
+.card {
+  transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s ease, border-color .4s ease;
+}
+.card:hover { transform: translateY(-6px); }
+
+/* Divider dot */
+.dot { width: 4px; height: 4px; border-radius: 999px; background: currentColor; display: inline-block; opacity: .5; }
